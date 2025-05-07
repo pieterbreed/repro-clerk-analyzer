@@ -1,0 +1,39 @@
+{:paths ["src" "resources"]
+ :deps {org.clojure/clojure                       {:mvn/version "1.12.0"}
+
+        ;; the suspect
+        com.github.gometro/afrolabs-clj           {:git/url "git@github.com:GoMetro/afrolabs-clj.git"
+                                                   :git/sha "a17c7c2e3ef01d6f00f548fc5291c269b4124b2a"}
+        ;; thinks about code
+        org.babashka/sci                     {:mvn/version "0.9.45"}
+
+        ;; bonus, for "kafka"
+        software.amazon.msk/aws-msk-iam-auth {:mvn/version "2.3.1"}
+
+        ;; I often use together
+        techascent/tech.ml.dataset {:mvn/version "7.053"}
+        }
+ :mvn/repos {"confluent" {:url "https://packages.confluent.io/maven/"}}
+ :aliases {:repl
+           {:ns-default  afrolabs.gometro-bridge.core
+            :extra-paths ["dev" "dev-resources"]
+            :extra-deps {djblue/portal       {:mvn/version "0.58.5"}
+                         criterium/criterium {:mvn/version "0.4.6"}}
+            :jvm-opts   ["-Djdk.attach.allowAttachSelf"]}
+
+           :notebooks ;; collection of repl-time clerk notebooks
+           {:extra-paths ["notebooks"]
+            :extra-deps {io.github.nextjournal/clerk {;;:mvn/version "0.17.1102"
+                                                      :git/url "git@github.com:nextjournal/clerk.git"
+                                                      :git/sha "f4c5488e36c8df11fe352889544e7deb9af73cb7"}
+                         ;; :exclusions [org.clojure/tools.analyzer
+                         ;;              org.clojure/tools.analyzer.jvm
+                         ;;              borkdude/edamame
+                         ;;              io.methvin/directory-watcher
+                         ;;              org.clojure/core.memoize
+                         ;;              org.ow2.asm/asm
+                         ;;              org.clojure/core.cache
+                         ;;              org.clojure/data.priority-map]
+                         }}
+           }
+ }
